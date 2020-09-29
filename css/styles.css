@@ -2,23 +2,34 @@ body {
     margin: 0px;
     text-align: center;
     font-family: 'Merriweather', serif;
+    font-weight: bolder;
     line-height: 2;
+    color: #40514E;
 }
 
 .top-container {
     position: relative;
-    padding-top: 100px;
+    padding-top: 30px;
     background-color: #d0e6fa;
 }
 
+.profile-picture {
+    width: 30%;
+}
+
+.profile {
+    width: 50%;
+    margin: 100px auto 100px auto;
+    line-height: 2;
+}
 .top-cloud {
     position: absolute;
-    top: 10%;
+    top: 8%;
     right: 25%;
 }
 
 .mountain-pic {
-    width: 70%;
+    width: 50%;
 }
 
 .bottom-cloud {
@@ -37,12 +48,18 @@ body {
 }
 
 .bottom-container {
-    background-color: white;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #66bfbf;
+}
+
+.contact-me {
+    margin-bottom: 20px;
 }
 
 h1 {
     color: #66BFBF;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 10px;
     font-size: 7rem;
     font-family: 'Sacramento', cursive;
@@ -87,6 +104,14 @@ a{
     margin-left: 15px;
 }
 
-.profile-picture {
-    width: 25%;
+.copyright {
+    color: #eaf6f6;
 }
+
+hr {
+    width: 13%;
+    border: none;
+    border-top: 15px dotted #eaf6f6;
+}
+
+
