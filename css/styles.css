@@ -1,3 +1,7 @@
+:root {
+  --top-border-bg: rgb(29, 26, 77);
+  --main-border-bg: #455454;
+}
 body {
   margin: 0px;
   text-align: center;
@@ -5,19 +9,26 @@ body {
   font-weight: bolder;
   line-height: 2;
   color: #a8a688;
-  background-color: rgb(29, 26, 77);
-  animation-name: hide-scroll;
-  animation-duration: 3s;
+  background-color: rgb(0, 0, 0);
 }
 
 .top-container {
   position: relative;
-  padding-top: 30px;
-
+  border: solid 30px var(--top-border-bg);
+  border-bottom: none;
   height: 100vh;
-  background-color: rgb(29, 26, 77);
-  background-image: url("../images/star-bg.png");
-  z-index: -2;
+  background-color: rgb(0, 0, 0);
+}
+
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+  padding: 10px;
 }
 
 .profile-picture {
@@ -45,82 +56,6 @@ body {
   width: 100%;
 }
 
-@keyframes planet {
-  0% {
-
-    bottom: -100vh;
-  }
-
-  25% {
-    filter: saturate(0%);
-  }
-
-  50% {
-    filter: saturate(25%);
-  }
-
-  75% {
-    filter: saturate(25%);
-    bottom: 0px;
-  }
-
-  100% {
-    filter: saturate(100%);
-  }
-}
-
-@keyframes glow {
-  0% {
-    bottom: -100vh;
-  }
-
-  50% {
-    bottom: -100vh;
-  }
-
-  100% {
-    bottom: 0px;
-  }
-}
-
-@keyframes hide-scroll {
-  0% {
-    overflow: hidden;
-  }
-
-  99% {
-    overflow: hidden;
-  }
-}
-
-.planet-pic {
-  position: absolute;
-  left: 29.5vw;
-  margin: auto;
-  width: 40%;
-  animation-duration: 3s;
-  animation-name: planet;
-  z-index: -1;
-  bottom: 0px;
-  animation-fill-mode: both;
-}
-
-
-.glow-pic {
-  position: relative;
-  display: block;
-  margin: auto;
-  width: 58%;
-  animation-duration: 3s;
-  animation-name: glow;
-  z-index: -2;
-  animation-fill-mode: forwards;
-}
-
-.page-content {
-  animation-name: show-page;
-}
-
 .middle-container {
   background-color: rgb(29, 26, 77);
 }
@@ -133,11 +68,11 @@ body {
 
 .contact-me {
   margin-bottom: 20px;
+  padding-bottom: 15px;
 }
 
 h1 {
   color: #11999e;
-  margin-top: 30px;
   margin-bottom: 10px;
   font-size: 6rem;
   font-family: "Trispace";
