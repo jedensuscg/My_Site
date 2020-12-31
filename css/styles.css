@@ -1,9 +1,10 @@
 :root {
-  --top-border-bg: rgb(29, 26, 77);
-  --main-border-bg: #455454;
+  --top-border-bg:  rgba(0,134,156,1);
+  --main-border-bg: #721100;
 }
+
 body {
-  margin: 0px;
+  margin: 10px 0 10px 0px;
   text-align: center;
   font-family: "Merriweather", serif;
   font-weight: bolder;
@@ -12,11 +13,83 @@ body {
   background-color: rgb(0, 0, 0);
 }
 
+::-webkit-scrollbar-thumb {
+  background: rgb(57, 47, 187);
+  border-radius: 10px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track{
+  background: rgb(0, 0, 0);
+}
+
+@keyframes border {
+  0% {
+    border-left: solid 50vw;
+    border-right: solid 50vw;
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
+  }
+
+  100% {
+    border-left: solid 10vw var(--top-border-bg);
+    border-right: solid 10vw var(--top-border-bg);
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+
+  }
+}
+
+@keyframes top {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+
+
+@keyframes hello {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 100;
+  }
+}
+
+.intro-border {
+  animation-name: border;
+  animation-duration: 2s;
+  border: solid 10vw var(--top-border-bg);
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+  border-bottom: none;
+  margin: auto;
+}
+
+.hello {
+  animation: hello;
+  animation-duration: 4s;
+}
+
 .top-container {
+  display: block;
   position: relative;
   border: solid 30px var(--top-border-bg);
-  border-bottom: none;
+  border-radius: 50px;
   height: 100vh;
+  margin: -20px;
   background-color: rgb(0, 0, 0);
 }
 
@@ -46,6 +119,8 @@ li {
 .header-div {
   display: block;
   max-height: .5vw;
+  animation-name: top;
+  animation-duration: 5s;
 }
 
 .img-block {
@@ -57,7 +132,8 @@ li {
 }
 
 .middle-container {
-  background-color: rgb(29, 26, 77);
+background: var(--top-border-bg);
+background: linear-gradient(0deg, rgba(2,18,63,1) 0%, rgba(0,13,124,1) 38%, rgba(0,134,156,1) 100%);
 }
 
 .bottom-container {
@@ -116,11 +192,11 @@ a {
 }
 
 .project-div:hover {
-  background-color: #2f5a5a;
+  background-color: #4749493f;
 }
 
 .skill-row {
-  width: 50%;
+  width: 75%;
   margin: 100px auto 100px auto;
   line-height: 2;
   text-align: left;
