@@ -2,8 +2,8 @@ name: Upload Website
 
 on:
   push:
-    branches:
-    - master
+    paths:
+    - 'public/**'
 
 jobs:
   deploy:
