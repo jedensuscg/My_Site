@@ -99,7 +99,7 @@ body {
   padding: 0;
 }
 
-li {
+ul.navbar li {
   display: inline;
   padding: 10px;
 }
@@ -195,6 +195,7 @@ a {
   background-color: #4749493f;
 }
 
+
 .skill-row {
   width: 75%;
   margin: 100px auto 100px auto;
@@ -204,13 +205,13 @@ a {
 
 .devlogo {
   width: 25%;
-  float: left;
+  float: right;
   margin-right: 30px;
 }
 
 .wings {
   width: 50%;
-  float: right;
+  float: left;
   margin-left: 15px;
 }
 
