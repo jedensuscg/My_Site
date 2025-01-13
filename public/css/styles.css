@@ -182,9 +182,48 @@ a {
   color: #11999e;
 }
 
+.image-container {
+    position: relative;
+    margin: auto;
+    width: 50%;
+  }
+
 .project-image {
-  width: 50%;
+  width: 100%;
+  box-sizing: border-box;
 }
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 98%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #0076ba77;
+  }
+
+  .image-container:hover .image-overlay {
+    opacity: 1;
+  }
+
+  .image-text {
+    color: white;
+    background-color: #00bab1;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 20px 32px;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
 
 .project-div {
   margin: auto;
@@ -192,7 +231,7 @@ a {
 }
 
 .project-div:hover {
-  background-color: #4749493f;
+  background-color: #494c5e8a;
 }
 
 
@@ -260,3 +299,20 @@ hr {
   border-radius: 10px;
   text-decoration: none;
 }
+.parking-winds-wrapper {
+    width: 100%;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.parking-winds-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+    gap: 5px;
+}
+
+.grid-child .image-container {
+    width: 90%; /* Scale down only if necessary */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below images */
+  }
