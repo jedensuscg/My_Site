@@ -16,6 +16,7 @@
             font-family: 'Creepster', cursive;
             font-size: 3rem;
             text-align: center;
+            
         }
         #message {
             display: none;
@@ -27,6 +28,7 @@
 </head>
 <body>
     <div id="container">
+        <button id="refreshButton" style="display: none;" onclick="refreshPage()">Play Again</button>
         <img id="gif" src="images/giphy.gif" alt="Spooky GIF">
         <audio id="sound" src="images/evil-laughter-423671.mp3"></audio>
         <div id="message">TRICK OR TREAT! <br> Happy Halloween from the Edens Family!</div>
@@ -36,6 +38,17 @@
         const gif = document.getElementById('gif');
         const message = document.getElementById('message'); 
         const sound = document.getElementById('sound');
+        const refreshButton = document.getElementById('refreshButton');
+
+        // Show the button after the GIF disappears
+        setTimeout(() => {
+            refreshButton.style.display = 'block';
+        }, 6000);
+
+        // Function to refresh the page
+        function refreshPage() {
+            location.reload();
+        }
 
         // Play the sound when the user interacts with the page
         document.body.addEventListener('click', () => {
@@ -44,6 +57,24 @@
 
         // Set the duration for the GIF to play (e.g., 5 seconds)
         setTimeout(() => {
+            refreshButton.style.backgroundColor = 'orange';
+            refreshButton.style.color = 'black';
+            refreshButton.style.border = '2px solid red';
+            refreshButton.style.borderRadius = '10px';
+            refreshButton.style.padding = '10px 20px';
+            refreshButton.style.fontFamily = "'Creepster', cursive";
+            refreshButton.style.fontSize = '1.5rem';
+            refreshButton.style.cursor = 'pointer';
+            refreshButton.style.boxShadow = '0 0 10px red';
+            refreshButton.style.transition = 'transform 0.2s, box-shadow 0.2s';
+            refreshButton.addEventListener('mouseover', () => {
+            refreshButton.style.transform = 'scale(1.1)';
+            refreshButton.style.boxShadow = '0 0 20px red';
+            });
+            refreshButton.addEventListener('mouseout', () => {
+            refreshButton.style.transform = 'scale(1)';
+            refreshButton.style.boxShadow = '0 0 10px red';
+            });
             gif.style.display = 'none';
             message.style.display = 'block';
         }, 5000); // 5000ms = 5 seconds
