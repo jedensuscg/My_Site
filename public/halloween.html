@@ -71,6 +71,8 @@
             refreshButton.style.transform = 'scale(1.1)';
             refreshButton.style.boxShadow = '0 0 20px red';
             });
+            // Play the sound on page load
+            sound.play();
             refreshButton.addEventListener('mouseout', () => {
             refreshButton.style.transform = 'scale(1)';
             refreshButton.style.boxShadow = '0 0 10px red';
