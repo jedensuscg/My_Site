@@ -16,23 +16,34 @@
             background-color: black;
             color: white;
             font-family: 'Creepster', cursive;
-            font-size: 2.5rem;
-            text-align: center;
             overflow: hidden;
         }
 
+        #startOverlay {
+            position: fixed;
+            inset: 0;
+            background: black;
+            color: orange;
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            text-align: center;
+            text-shadow: 2px 2px 5px red;
+        }
+
         #gif {
-            width: 90vw;           /* responsive width */
-            height: 80vh;          /* takes up ~80% of screen height */
-            max-width: 500px;      /* limit for larger screens */
+            width: 90vw;
+            height: 80vh;
+            max-width: 500px;
             object-fit: contain;
             opacity: 0;
             transition: opacity 2s ease-in-out;
             display: none;
-            margin-bottom: 15px;
             border-radius: 15px;
             box-shadow: 0 0 25px red;
-            visibility: hidden; /* keeps it preloaded but unseen */
+            visibility: hidden;
         }
 
         #message, #secondMessage {
@@ -83,13 +94,13 @@
     </style>
 </head>
 <body>
-    <!-- Preloaded but invisible GIF -->
-    <img id="gif" src="images/giphy.gif" alt="Spooky GIF" loading="eager">
+    <div id="startOverlay">🎃 Tap to Begin 🎃</div>
 
+    <img id="gif" src="images/giphy.gif" alt="Spooky GIF" loading="eager">
     <div id="message">TRICK...</div>
     <div id="secondMessage">...OR TREAT!</div>
     <div id="familyMessage">Happy Halloween from the Edens Family!</div>
-    <button id="refreshButton" onclick="refreshPage()">Play Again</button>
+    <button id="refreshButton" onclick="location.reload()">Play Again</button>
 
     <audio id="sound" src="images/evil-laughter-423671.mp3"></audio>
 
@@ -100,53 +111,51 @@
         const familyMessage = document.getElementById('familyMessage');
         const sound = document.getElementById('sound');
         const refreshButton = document.getElementById('refreshButton');
+        const startOverlay = document.getElementById('startOverlay');
 
-        // Play sound only after user interacts (mobile autoplay restriction)
-        document.body.addEventListener('click', () => sound.play(), { once: true });
-
-        // Step 1: Fade in "TRICK..."
-        requestAnimationFrame(() => {
-            message.style.opacity = 1;
+        startOverlay.addEventListener('click', () => {
+            startOverlay.style.display = 'none';
+            startSequence();
         });
 
-        // Step 2: After 3 seconds, fade "TRICK..." out and show GIF
-        setTimeout(() => {
-            message.style.opacity = 0;
+        function startSequence() {
+            message.style.opacity = 1;
+
+            // "TRICK..." for 3 seconds
             setTimeout(() => {
-                message.style.display = 'none';
-                gif.style.display = 'block';
-                gif.style.visibility = 'visible';
-                requestAnimationFrame(() => {
-                    gif.style.opacity = 1; // fade GIF in
-                });
-            }, 1000);
-        }, 3000);
+                message.style.opacity = 0;
+                setTimeout(() => {
+                    message.style.display = 'none';
+                    gif.style.display = 'block';
+                    gif.style.visibility = 'visible';
+                    requestAnimationFrame(() => {
+                        gif.style.opacity = 1;
+                    });
+                }, 1000);
+            }, 3000);
 
-        // Step 3: After 7 seconds total, fade out GIF and show "...OR TREAT!"
-        setTimeout(() => {
-            gif.style.opacity = 0;
+            // GIF shows for 4 seconds
             setTimeout(() => {
-                gif.style.display = 'none';
-                secondMessage.style.display = 'block';
-                requestAnimationFrame(() => {
-                    secondMessage.style.opacity = 1;
-                });
-                sound.play();
-            }, 2000);
-        }, 7000);
+                gif.style.opacity = 0;
+                setTimeout(() => {
+                    gif.style.display = 'none';
+                    secondMessage.style.display = 'block';
+                    requestAnimationFrame(() => {
+                        secondMessage.style.opacity = 1;
+                    });
+                    sound.play(); // Now works since user tapped earlier
+                }, 2000);
+            }, 7000);
 
-        // Step 4: After 10 seconds, show family message
-        setTimeout(() => {
-            familyMessage.style.display = 'block';
-        }, 10000);
+            // Show family message
+            setTimeout(() => {
+                familyMessage.style.display = 'block';
+            }, 10000);
 
-        // Step 5: After 12 seconds, show refresh button
-        setTimeout(() => {
-            refreshButton.style.display = 'block';
-        }, 12000);
-
-        function refreshPage() {
-            location.reload();
+            // Show refresh button
+            setTimeout(() => {
+                refreshButton.style.display = 'block';
+            }, 12000);
         }
     </script>
 </body>
