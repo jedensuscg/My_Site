@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halloween</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: 'Creepster', cursive;
+            font-size: 3rem;
+            text-align: center;
+        }
+        #message {
+            display: none;
+            color: orange;
+            text-shadow: 2px 2px 5px red;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="container">
+        <img id="gif" src="images/giphy.gif" alt="Spooky GIF">
+        <audio id="sound" src="images/evil-laughter-423671.mp3"></audio>
+        <div id="message">TRICK OR TREAT! <br> Happy Halloween from the Edens Family!</div>
+    </div>
+
+    <script>
+        const gif = document.getElementById('gif');
+        const message = document.getElementById('message'); 
+        const sound = document.getElementById('sound');
+
+        // Play the sound when the user interacts with the page
+        document.body.addEventListener('click', () => {
+            sound.play();
+        });
+
+        // Set the duration for the GIF to play (e.g., 5 seconds)
+        setTimeout(() => {
+            gif.style.display = 'none';
+            message.style.display = 'block';
+        }, 5000); // 5000ms = 5 seconds
+    </script>
+</body>
+</html>
