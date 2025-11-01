@@ -31,9 +31,16 @@
         <button id="refreshButton" style="display: none;" onclick="refreshPage()">Play Again</button>
         <img id="gif" src="images/giphy.gif" alt="Spooky GIF">
         <audio id="sound" src="images/evil-laughter-423671.mp3"></audio>
-        <div id="message">TRICK OR TREAT! <br> Happy Halloween from the Edens Family!</div>
+        <div id="message">TRICK OR TREAT!</div>
+        <script>
+            setTimeout(() => {
+                const secondMessage = document.getElementById('secondMessage');
+                secondMessage.style.display = 'block';
+            }, 6000); // 10000ms = 10 seconds
+        </script>
+        <div id="secondMessage" style="display: none; color: rgb(255, 81, 0); text-shadow: 2px 2px 5px purple;">Happy Halloween from the Edens Family!</div>
     </div>
-
+    <script></script>
     <script>
         const gif = document.getElementById('gif');
         const message = document.getElementById('message'); 
@@ -43,7 +50,7 @@
         // Show the button after the GIF disappears
         setTimeout(() => {
             refreshButton.style.display = 'block';
-        }, 6000);
+        }, 8000);
 
         // Function to refresh the page
         function refreshPage() {
@@ -79,6 +86,7 @@
             });
             gif.style.display = 'none';
             message.style.display = 'block';
+            const secondMessage = document.getElementById('secondMessage');
         }, 5000); // 5000ms = 5 seconds
     </script>
 </body>
