@@ -4,90 +4,150 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halloween</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: black;
             color: white;
             font-family: 'Creepster', cursive;
-            font-size: 3rem;
+            font-size: 2.5rem;
             text-align: center;
-            
+            overflow: hidden;
         }
+
+        #gif {
+            width: 90vw;           /* responsive width */
+            height: 80vh;          /* takes up ~80% of screen height */
+            max-width: 500px;      /* limit for larger screens */
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            display: none;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px red;
+            visibility: hidden; /* keeps it preloaded but unseen */
+        }
+
+        #message, #secondMessage {
+            text-shadow: 2px 2px 5px red;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+        }
+
         #message {
+            color: orange;
+            font-size: 2.8rem;
+        }
+
+        #secondMessage {
+            color: rgb(255, 81, 0);
+            text-shadow: 2px 2px 5px purple;
+            display: none;
+            font-size: 2.8rem;
+        }
+
+        #familyMessage {
             display: none;
             color: orange;
             text-shadow: 2px 2px 5px red;
+            font-size: 1.8rem;
+            margin-top: 10px;
+        }
+
+        #refreshButton {
+            display: none;
+            background-color: orange;
+            color: black;
+            border: 2px solid red;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-family: 'Creepster', cursive;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 0 10px red;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 25px;
+        }
+
+        #refreshButton:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px red;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="container">
-        <button id="refreshButton" style="display: none;" onclick="refreshPage()">Play Again</button>
-        <img id="gif" src="images/giphy.gif" alt="Spooky GIF">
-        <audio id="sound" src="images/evil-laughter-423671.mp3"></audio>
-        <div id="message">TRICK OR TREAT!</div>
-        <script>
-            setTimeout(() => {
-                const secondMessage = document.getElementById('secondMessage');
-                secondMessage.style.display = 'block';
-            }, 6000); // 10000ms = 10 seconds
-        </script>
-        <div id="secondMessage" style="display: none; color: rgb(255, 81, 0); text-shadow: 2px 2px 5px purple;">Happy Halloween from the Edens Family!</div>
-    </div>
-    <script></script>
+    <!-- Preloaded but invisible GIF -->
+    <img id="gif" src="images/giphy.gif" alt="Spooky GIF" loading="eager">
+
+    <div id="message">TRICK...</div>
+    <div id="secondMessage">...OR TREAT!</div>
+    <div id="familyMessage">Happy Halloween from the Edens Family!</div>
+    <button id="refreshButton" onclick="refreshPage()">Play Again</button>
+
+    <audio id="sound" src="images/evil-laughter-423671.mp3"></audio>
+
     <script>
         const gif = document.getElementById('gif');
-        const message = document.getElementById('message'); 
+        const message = document.getElementById('message');
+        const secondMessage = document.getElementById('secondMessage');
+        const familyMessage = document.getElementById('familyMessage');
         const sound = document.getElementById('sound');
         const refreshButton = document.getElementById('refreshButton');
 
-        // Show the button after the GIF disappears
+        // Play sound only after user interacts (mobile autoplay restriction)
+        document.body.addEventListener('click', () => sound.play(), { once: true });
+
+        // Step 1: Fade in "TRICK..."
+        requestAnimationFrame(() => {
+            message.style.opacity = 1;
+        });
+
+        // Step 2: After 3 seconds, fade "TRICK..." out and show GIF
+        setTimeout(() => {
+            message.style.opacity = 0;
+            setTimeout(() => {
+                message.style.display = 'none';
+                gif.style.display = 'block';
+                gif.style.visibility = 'visible';
+                requestAnimationFrame(() => {
+                    gif.style.opacity = 1; // fade GIF in
+                });
+            }, 1000);
+        }, 3000);
+
+        // Step 3: After 7 seconds total, fade out GIF and show "...OR TREAT!"
+        setTimeout(() => {
+            gif.style.opacity = 0;
+            setTimeout(() => {
+                gif.style.display = 'none';
+                secondMessage.style.display = 'block';
+                requestAnimationFrame(() => {
+                    secondMessage.style.opacity = 1;
+                });
+                sound.play();
+            }, 2000);
+        }, 7000);
+
+        // Step 4: After 10 seconds, show family message
+        setTimeout(() => {
+            familyMessage.style.display = 'block';
+        }, 10000);
+
+        // Step 5: After 12 seconds, show refresh button
         setTimeout(() => {
             refreshButton.style.display = 'block';
-        }, 8000);
+        }, 12000);
 
-        // Function to refresh the page
         function refreshPage() {
             location.reload();
         }
-
-        // Play the sound when the user interacts with the page
-        document.body.addEventListener('click', () => {
-            sound.play();
-        });
-
-        // Set the duration for the GIF to play (e.g., 5 seconds)
-        setTimeout(() => {
-            refreshButton.style.backgroundColor = 'orange';
-            refreshButton.style.color = 'black';
-            refreshButton.style.border = '2px solid red';
-            refreshButton.style.borderRadius = '10px';
-            refreshButton.style.padding = '10px 20px';
-            refreshButton.style.fontFamily = "'Creepster', cursive";
-            refreshButton.style.fontSize = '1.5rem';
-            refreshButton.style.cursor = 'pointer';
-            refreshButton.style.boxShadow = '0 0 10px red';
-            refreshButton.style.transition = 'transform 0.2s, box-shadow 0.2s';
-            refreshButton.addEventListener('mouseover', () => {
-            refreshButton.style.transform = 'scale(1.1)';
-            refreshButton.style.boxShadow = '0 0 20px red';
-            });
-            // Play the sound on page load
-            sound.play();
-            refreshButton.addEventListener('mouseout', () => {
-            refreshButton.style.transform = 'scale(1)';
-            refreshButton.style.boxShadow = '0 0 10px red';
-            });
-            gif.style.display = 'none';
-            message.style.display = 'block';
-            const secondMessage = document.getElementById('secondMessage');
-        }, 5000); // 5000ms = 5 seconds
     </script>
 </body>
 </html>
